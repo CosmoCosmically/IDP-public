@@ -1,0 +1,20 @@
+[project]
+name = "idp"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "mpremote",
+    "pylint>=4.0.4",
+    "ruff",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "micropython-rp2-pico-w-stubs",
+]
+
+[tool.pylint]
+fail-under = 4.0
+limit-inference-results = 100
+persistent = true
+suggestion-mode = true

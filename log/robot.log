@@ -1,0 +1,350 @@
+540 I2C LEFT: [41]
+617 I2C RIGHT: [41]
+2198 Grabber: Moving jaw OPEN
+2201 Servo controller: Setting servo grabber to position 0, pulse width 1700, pwm 5570
+2203 Grabber: Moving lifter DOWN
+2205 Servo controller: Setting servo lifter to position 2, pulse width 1300, pwm 4260
+4574 Robot loop starting
+4576 tofs: Starting both tofs
+4584 ToF sensors started!
+4586 AGV: Starting - going to P2
+4587 Pathfinding: START_BOX P2 N
+4592 Nav - moves ['N', 'N', 'W', 'S']
+4594 pathfinding - N N 2
+4596 pathfinding - W W 0
+4598 pathfinding - S S 0
+4657 Navigation: setting route [2, 0, 0], path ['S', 'J29', 'J28', 'P2'], ori
+4659 Motion: Received forward command
+4661 Motion: internal forward
+5136 Junction detection: Detected a junction True
+5138 Motion: internal forward
+5141 Motion: detected junction, crawling (1, 0, 1, 0)
+5276 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 1)
+5279 Navigation: Entering junction handling
+5281 Navigation: Getting next step in route
+5282 Navigation: next node J29
+5289 Navigation: Executing the command
+5291 Motion: Received continue straight command
+5292 Motion: internal forward
+5447 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+5449 Motion: successful junction (0, 1, 1, 0)
+5460 Navigation: Turning complete, going forward & state NAVIGATING
+5461 Motion: Received forward command
+5463 Motion: internal forward
+5657 Junction detection: Detected a junction True
+5658 Motion: internal forward
+5661 Motion: detected junction, crawling (1, 1, 1, 0)
+5797 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 0, 0, 1)
+5799 Navigation: Entering junction handling
+5801 Navigation: Getting next step in route
+5802 Navigation: next node J28
+5804 Navigation: Executing the command
+5807 Motion: Received left command
+5810 Motion: left 6684 JUNCTION
+6486 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+6488 Motion: successful junction (0, 1, 1, 0)
+6492 Navigation: Turning complete, going forward & state NAVIGATING
+6501 Motion: Received forward command
+6503 Motion: internal forward
+10477 Junction detection: Detected a junction True
+10478 Motion: internal forward
+10481 Motion: detected junction, crawling (1, 1, 1, 0)
+10617 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+10619 Navigation: Entering junction handling
+10621 Navigation: Getting next step in route
+10622 Navigation: next node P2
+10624 Navigation: Executing the command
+10627 Motion: Received left command
+10630 Motion: left 11504 JUNCTION
+11276 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+11278 Motion: successful junction (0, 1, 1, 0)
+11281 Navigation: Turning complete, going forward & state NAVIGATING
+11282 Motion: Received forward command
+11284 Motion: internal forward
+12556 Junction detection: Detected a junction True
+12558 Motion: internal forward
+12561 Motion: detected junction, crawling (1, 1, 1, 0)
+12697 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (1, 1, 1, 1)
+12702 Navigation: Entering junction handling
+12705 Motion: Received stop command
+12708 Motion: internal stop
+12711 Navigation: Completed route
+12712 AGV: At pickup bay
+12726 AGV: Picking up reel
+12728 Grabber: Picking up reel
+12741 Grabber: Moving jaw CLOSED
+12743 Servo controller: Setting servo grabber to position 1, pulse width 1400, pwm 4587
+13248 Servo controller: Servo probably in position
+13250 Resistance sensing - starting sense!
+13252 Grabber: Moving lifter MID
+13254 Servo controller: Setting servo lifter to position 3, pulse width 1400, pwm 4587
+13329 Resistance sensing - got reel 2, vals
+13756 Servo controller: Servo probably in position
+13758 Resistance sensing - resetting sense!
+13761 Pathfinding: P2 J13 S
+13773 Nav - moves ['N', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'E', 'S', 'W', 'N']
+13776 pathfinding - W W 1
+13778 pathfinding - N N 1
+13780 pathfinding - N N 2
+13781 pathfinding - N N 2
+13783 pathfinding - N N 2
+13785 pathfinding - N N 2
+13787 pathfinding - N N 2
+13823 pathfinding - N N 2
+13826 pathfinding - N N 2
+13828 pathfinding - E E 1
+13830 pathfinding - S S 1
+13832 pathfinding - W W 1
+13834 pathfinding - N N 1
+13837 Navigation: setting route [1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1], path ['J28', 'J27', 'J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J36', 'J32', 'J25', 'J26', 'J34', 'J13'], ori
+13839 Motion: Received reverse command
+13840 Motion: internal reverse
+13843 Grabber: Resetting the grabber!
+13845 AGV: Picked up - reset grabber & going to dropoff J13 for reel 2
+15467 Junction detection: Detected a junction True
+15469 Motion: internal forward
+15471 Motion: detected junction, crawling (0, 1, 1, 1)
+15607 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (1, 1, 1, 1)
+15611 Navigation: Entering junction handling
+15638 Navigation: Getting next step in route
+15642 Navigation: next node J27
+15643 Navigation: Executing the command
+15647 Motion: Received right command
+15648 Motion: right 16524 JUNCTION
+16307 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+16312 Motion: successful junction (0, 1, 1, 0)
+16320 Navigation: Turning complete, going forward & state NAVIGATING
+16322 Motion: Received forward command
+16323 Motion: internal forward
+17706 Junction detection: Detected a junction True
+17708 Motion: internal forward
+17711 Motion: detected junction, crawling (1, 1, 1, 0)
+17847 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 1)
+17850 Navigation: Entering junction handling
+17852 Navigation: Getting next step in route
+17853 Navigation: next node J1
+17857 Navigation: Executing the command
+17858 Motion: Received right command
+17860 Motion: right 18735 JUNCTION
+18506 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+18508 Motion: successful junction (0, 1, 1, 0)
+18511 Navigation: Turning complete, going forward & state NAVIGATING
+18512 Motion: Received forward command
+18514 Motion: internal forward
+22826 Junction detection: Detected a junction True
+22831 Motion: internal forward
+22834 Motion: detected junction, crawling (0, 1, 1, 1)
+22967 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+22974 Navigation: Entering junction handling
+22978 Navigation: Getting next step in route
+22980 Navigation: next node J2
+22981 Navigation: Executing the command
+22982 Motion: Received continue straight command
+22984 Motion: internal forward
+23136 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+23138 Motion: successful junction (0, 0, 1, 0)
+23144 Navigation: Turning complete, going forward & state NAVIGATING
+23150 Motion: Received forward command
+23152 Motion: internal forward
+23407 Junction detection: Detected a junction True
+23408 Motion: internal forward
+23411 Motion: detected junction, crawling (0, 1, 1, 1)
+23547 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+23552 Navigation: Entering junction handling
+23554 Navigation: Getting next step in route
+23561 Navigation: next node J3
+23563 Navigation: Executing the command
+23564 Motion: Received continue straight command
+23568 Motion: internal forward
+23726 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+23728 Motion: successful junction (0, 1, 0, 0)
+23731 Navigation: Turning complete, going forward & state NAVIGATING
+23732 Motion: Received forward command
+23734 Motion: internal forward
+23984 Junction detection: Detected a junction True
+23986 Motion: internal forward
+23989 Motion: detected junction, crawling (0, 1, 1, 1)
+24127 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+24129 Navigation: Entering junction handling
+24131 Navigation: Getting next step in route
+24132 Navigation: next node J4
+24134 Navigation: Executing the command
+24137 Motion: Received continue straight command
+24139 Motion: internal forward
+24296 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+24337 Motion: successful junction (0, 1, 1, 0)
+24362 Navigation: Turning complete, going forward & state NAVIGATING
+24372 Motion: Received forward command
+24373 Motion: internal forward
+24526 Junction detection: Detected a junction True
+24528 Motion: internal forward
+24531 Motion: detected junction, crawling (0, 1, 1, 1)
+24666 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+24671 Navigation: Entering junction handling
+24673 Navigation: Getting next step in route
+24674 Navigation: next node J5
+24678 Navigation: Executing the command
+24679 Motion: Received continue straight command
+24681 Motion: internal forward
+24836 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+24838 Motion: successful junction (0, 1, 1, 0)
+24841 Navigation: Turning complete, going forward & state NAVIGATING
+24842 Motion: Received forward command
+24844 Motion: internal forward
+25056 Junction detection: Detected a junction True
+25058 Motion: internal forward
+25064 Motion: detected junction, crawling (0, 1, 1, 1)
+25197 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+25203 Navigation: Entering junction handling
+25207 Navigation: Getting next step in route
+25209 Navigation: next node J6
+25210 Navigation: Executing the command
+25212 Motion: Received continue straight command
+25213 Motion: internal forward
+25366 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+25368 Motion: successful junction (0, 1, 1, 0)
+25373 Navigation: Turning complete, going forward & state NAVIGATING
+25379 Motion: Received forward command
+25381 Motion: internal forward
+25556 Junction detection: Detected a junction True
+25558 Motion: internal forward
+25561 Motion: detected junction, crawling (0, 1, 1, 1)
+25696 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+25701 Navigation: Entering junction handling
+25703 Navigation: Getting next step in route
+25704 Navigation: next node J36
+25711 Navigation: Executing the command
+25713 Motion: Received continue straight command
+25715 Motion: internal forward
+25867 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+25869 Motion: successful junction (0, 1, 1, 0)
+25880 Navigation: Turning complete, going forward & state NAVIGATING
+25881 Motion: Received forward command
+25883 Motion: internal forward
+26066 Junction detection: Detected a junction True
+26068 Motion: internal forward
+26071 Motion: detected junction, crawling (1, 1, 1, 0)
+26206 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+26211 Navigation: Entering junction handling
+26213 Navigation: Getting next step in route
+26215 Navigation: next node J32
+26218 Navigation: Executing the command
+26220 Motion: Received continue straight command
+26221 Motion: internal forward
+26376 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+26378 Motion: successful junction (0, 1, 1, 0)
+26384 Navigation: Turning complete, going forward & state NAVIGATING
+26390 Motion: Received forward command
+26392 Motion: internal forward
+28297 Junction detection: Detected a junction True
+28298 Motion: internal forward
+28301 Motion: detected junction, crawling (0, 1, 1, 1)
+28437 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 0, 0, 0)
+28439 Navigation: Entering junction handling
+28441 Navigation: Getting next step in route
+28442 Navigation: next node J25
+28444 Navigation: Executing the command
+28447 Motion: Received right command
+28449 Motion: right 29324 JUNCTION
+29186 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+29188 Motion: successful junction (0, 1, 1, 0)
+29193 Navigation: Turning complete, going forward & state NAVIGATING
+29200 Motion: Received forward command
+29201 Motion: internal forward
+34686 Junction detection: Detected a junction True
+34688 Motion: internal forward
+34691 Motion: detected junction, crawling (0, 1, 1, 1)
+34827 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+34833 Navigation: Entering junction handling
+34837 Navigation: Getting next step in route
+34839 Navigation: next node J26
+34840 Navigation: Executing the command
+34841 Motion: Received right command
+34843 Motion: right 35718 JUNCTION
+35626 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+35628 Motion: successful junction (0, 1, 1, 0)
+35633 Navigation: Turning complete, going forward & state NAVIGATING
+35639 Motion: Received forward command
+35641 Motion: internal forward
+44586 Junction detection: Detected a junction True
+44588 Motion: internal forward
+44591 Motion: detected junction, crawling (1, 1, 1, 0)
+44727 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 1)
+44730 Navigation: Entering junction handling
+44732 Navigation: Getting next step in route
+44733 Navigation: next node J34
+44737 Navigation: Executing the command
+44738 Motion: Received right command
+44743 Motion: right 45618 JUNCTION
+45416 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+45418 Motion: successful junction (0, 1, 1, 0)
+45421 Navigation: Turning complete, going forward & state NAVIGATING
+45422 Motion: Received forward command
+45424 Motion: internal forward
+47766 Junction detection: Detected a junction True
+47768 Motion: internal forward
+47771 Motion: detected junction, crawling (0, 1, 1, 1)
+47906 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 0, 0, 0)
+47911 Navigation: Entering junction handling
+47913 Navigation: Getting next step in route
+47914 Navigation: next node J13
+47918 Navigation: Executing the command
+47919 Motion: Received right command
+47921 Motion: right 48796 JUNCTION
+48696 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+48698 Motion: successful junction (0, 1, 1, 0)
+48701 Navigation: Turning complete, going forward & state NAVIGATING
+48702 Motion: Received forward command
+48712 Motion: internal forward
+50547 Junction detection: Detected a junction True
+50548 Motion: internal forward
+50551 Motion: detected junction, crawling (1, 1, 1, 0)
+50687 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (0, 1, 1, 0)
+50690 Navigation: Entering junction handling
+50692 Motion: Received stop command
+50693 Motion: internal stop
+50696 Navigation: Completed route
+50698 AGV: At start node for drop off bays
+50699 Starting dropoff DROPOFF FINDING_BAY
+50701 Grabber: Moving lifter UP
+50703 Servo controller: Setting servo lifter to position 4, pulse width 1550, pwm 5079
+50716 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50718 Navigation - dropoff - selected ToF is right
+50722 ToF: Got a reading 80
+50736 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50740 ToF: Got a reading 79
+50753 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50767 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50781 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50799 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50803 ToF: Got a reading 78
+50816 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+50819 ToF: Bay occupied: True, readings [80, 79, 78]
+50821 Navigation - dropoff: ToFs complete bay is occ: True
+50822 Navigation - dropoff: bay occ True
+50835 Navigation - dropoff: Bay is full! Going to next.
+50837 Navigation - dropoff: Executing command 2
+50838 Motion: Received continue straight command
+50840 Motion: internal forward
+50996 Line detection: detected new line with inner sensors, transitioning to SUCCESSFUL_JUNCTION
+50998 Motion: successful junction (0, 1, 1, 0)
+51004 Navigation - dropoff: Turning complete, going forward & state NAVIGATING
+51010 Motion: Received forward command
+51012 Motion: internal forward
+51396 Junction detection: Detected a junction True
+51398 Motion: internal forward
+51401 Motion: detected junction, crawling (1, 1, 1, 0)
+51403 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+51408 Navigation - dropoff - selected ToF is right
+51451 ToF: Got a reading 77
+51464 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+51480 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+51494 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+51510 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+51514 ToF: Got a reading 78
+51529 Navigation - dropoff: In PRE_JUNCTION, checking ToFs!
+51537 Motion control: Transitioning from PRE_JUNCTION to JUNCTION after grace! (1, 1, 1, 0)
+58644 Motion: Received stop command
+58648 Motion: internal stop
+58656 polls: 5408
+58658 Robot loop done

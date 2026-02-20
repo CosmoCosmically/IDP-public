@@ -1,0 +1,9 @@
+{
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": false,
+  "extraPaths": [
+    "typings",
+    ".micropython",
+    "lib/",
+  ]
+}
