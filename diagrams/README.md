@@ -36,9 +36,6 @@ The software is organised into the following primary modules:
         route from pathfinding result using virtual orientation, and
         uses a PD controller for continuous line correction.
 
-```{=html}
-<!-- -->
-```
 -   Grabber Subsystem
 
     -   Controls the jaw and lifter servos and performs resistance
