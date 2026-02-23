@@ -6,6 +6,14 @@
 #
 ####################################################################################################
 
+"""
+Global configuration constants for the AGV system.
+
+Defines timing parameters, hardware pin mappings, logging configuration,
+and shared runtime flags used across navigation, grabber, sensing,
+and motion subsystems.
+"""
+
 from grabber.components.types.resistance import Reel
 from navigation.components.types.lineSensor import LineSensor
 
@@ -24,6 +32,10 @@ DISABLE_RUN = False
 
 
 class LOG_LEVELS:
+    """
+    Logging level definitions used by the system logger.
+    Lower values correspond to more verbose output.
+    """
     TRACE = 0
     DEBUG = 1
     INFO = 2

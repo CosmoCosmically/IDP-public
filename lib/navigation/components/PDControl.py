@@ -19,6 +19,9 @@ from logger.logger import logger
 
 
 class PDControl:
+    """
+    Wrapper around PID controller configured for line-following correction.
+    """
     def __init__(self):
         self.pd = PID(PD.KP, PD.KI, PD.KD, setpoint=0, scale="cpu")
         self.pd.output_limits = (-MAX_PD_CORRECTION, MAX_PD_CORRECTION)
@@ -39,5 +42,7 @@ class PDControl:
         return correction or 0
 
     def reset(self):
-        "Reset when starting to move again / after a junction"
+        """
+        Reset internal PID state, typically after a junction or restart.
+        """
         self.pd.set_auto_mode(True, 0)

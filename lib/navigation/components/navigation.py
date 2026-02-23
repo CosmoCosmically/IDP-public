@@ -31,6 +31,10 @@ from navigation.state import (
 
 
 class navigation:
+    """
+    High-level navigation controller coordinating path planning,
+    motion control, and drop-off logic.
+    """
     def __init__(self):
         self._pathfinding = pathfinding()
         self._motion = motion()
@@ -61,7 +65,12 @@ class navigation:
 
     @property
     def state(self):
-        "Returns the state depending on which mode we're in."
+        """
+        Get the current navigation sub-state, depending on mode (path following or drop-off).
+
+        Returns:
+            PathFollowingState | DropoffState: Current sub-state.
+        """
         return (
             self._path_following_state
             if self._state == State.FOLLOWING_PATH
@@ -69,11 +78,33 @@ class navigation:
         )
 
     def _route_gen(self, route, path):
+        """
+        Generator yielding (junction command, node) pairs for each step in the planned route.
+
+        Args:
+            route (list[JunctionOptions]): List of relative junction commands.
+            path (list[str]): List of traversed node names.
+
+        Yields:
+            tuple[JunctionOptions, str]: Next command and corresponding node.
+        """
         # We correlate the current instruction with the NEXT node rather than current hence 1:
         for step, node in zip(route, path[1:]):
             yield (step, node)
 
     def get_directions(self, start: str, dest: str, orientation: str):
+        """
+        Compute directions and node path from start to destination given orientation.
+
+        Args:
+            start (str): Starting node name.
+            dest (str): Destination node name.
+            orientation (str): Initial orientation.
+
+        Returns:
+            tuple[str, list[str], list[JunctionOptions]] | None:
+                Final orientation, traversed nodes, and command list.
+        """
         return self._pathfinding.get_directions(start, dest, orientation)
 
     def set_route(
@@ -82,6 +113,14 @@ class navigation:
         start: str | None = None,  # type: ignore
         orientation: str | None = None,  # type: ignore
     ):
+        """
+        Set a new route to a destination, updating state and motion accordingly.
+
+        Args:
+            dest (str): Destination node.
+            start (str | None): Optional start node (defaults to current).
+            orientation (str | None): Optional start orientation (defaults to current).
+        """
         # Update states based on the route we're setting
         self._state = State.FOLLOWING_PATH
         self._path_following_state = PathFollowingState.NAVIGATING
@@ -116,6 +155,12 @@ class navigation:
             self._motion.forward()
 
     def get_tof_type(self):
+        """
+        Get the type of ToF sensor (left or right) to use based on the current node.
+
+        Returns:
+            str: "left" or "right" ToF type.
+        """
         if not self.current_node.startswith("J"):
             return "right"  # right  # or raise error
 
@@ -129,7 +174,12 @@ class navigation:
             return "right"  # fallback #right
 
     def start_dropoff(self, end_drop_node):
-        "Go into the NAVIGATING state for dropoff"
+        """
+        Enter dropoff mode and initialize drop-off state.
+
+        Args:
+            end_drop_node (str): Node to deliver to.
+        """
         self._state = State.DROPOFF
         self._dropoff_state = DropoffState.NAVIGATING
         self.dropoff_initial = True
@@ -137,7 +187,12 @@ class navigation:
         logger.log("Starting dropoff {} {}", self._state, self._dropoff_state)
 
     def dropoff_handler(self):
-        "Specialised handler for when we're in the delivery area."
+        """
+        Handler for drop-off area navigation and delivery logic.
+
+        Detects bay occupancy, determines turn direction, and manages drop-off sequence.
+        Updates state transitions for drop-off.
+        """
         if self.state == DropoffState.NAVIGATING:
             # Need to find an empty bay - check in pre-junction!
             if self.dropoff_initial or self._motion.state == MotionState.PRE_JUNCTION:
@@ -252,6 +307,11 @@ class navigation:
                 self._dropoff_state = DropoffState.COMPLETE
 
     def handler(self):
+        """
+        Main navigation handler for both path following and drop-off logic.
+
+        Executes junction commands, manages state transitions, and coordinates with motion control.
+        """
         if self.state == PathFollowingState.NAVIGATING:
             if self._motion.state == MotionState.JUNCTION:
                 logger.log(

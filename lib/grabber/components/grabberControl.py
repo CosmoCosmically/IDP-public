@@ -22,6 +22,10 @@ from grabber.components.state import JawState, LifterState, PickUpState, ServoSt
 
 
 class grabberControl:
+    """
+    High-level grabber controller coordinating jaw, lifter,
+    resistance sensing, and pickup/dropoff state machines.
+    """
     def __init__(self):
         self.jaw = servoController(Servo.GRABBER)
         self.lifter = servoController(Servo.LIFTER)
@@ -48,7 +52,9 @@ class grabberControl:
     # TODO: This is so we don't just have PICKED_UP / DROPPED_OFF be a one tick,
     #       it'd work but we would need very careful handling
     def reset(self):
-        "Reset the grabber."
+        """
+        Reset grabber state to REST.
+        """
         logger.log("Grabber: Resetting the grabber!")
         self._state = State.REST
 
@@ -82,13 +88,17 @@ class grabberControl:
         self.jaw.set_position(position, manual)
 
     def pickup(self):
+        """
+        Begin pickup sequence.
+        """
         logger.log("Grabber: Picking up reel")
-        "Pick up a reel when at a pickup bay & aligned."
         self._state = State.PICKING_UP
 
     def dropoff(self):
+        """
+        Begin dropoff sequence.
+        """
         logger.log("Grabber: Dropping off reel")
-        "Drop off a reel when at a dropoff bay & aligned."
         self._state = State.DROPPING_OFF
 
     def handler(self):

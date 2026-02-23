@@ -17,12 +17,21 @@ TIMEOUT = 1000
 
 
 class Button:
+    """
+    Debounced button wrapper providing edge-triggered state reporting.
+    """
     def __init__(self):
         self.b = Pin(BUTTON_PIN, Pin.IN)
         self._triggered = False
         self._debounce = None
 
     def state(self):
+        """
+        Return whether the button was triggered since last check.
+
+        Returns:
+            bool: True if a valid press event occurred.
+        """
         triggered = self._triggered
         if self._triggered:
             self._debounce = ticks_ms()
@@ -30,6 +39,9 @@ class Button:
         return triggered
 
     def _handler(self, _):
+        """
+        Internal interrupt-style handler implementing debounce logic.
+        """
         if self._debounce and ticks_diff(ticks_ms(), self._debounce) < TIMEOUT:
             return
         if self.b.value():

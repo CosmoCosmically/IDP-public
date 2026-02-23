@@ -1,3 +1,4 @@
+
 ####################################################################################################
 #
 # Navigation config for the AGV code.
@@ -5,6 +6,14 @@
 # Copyright (c) 2026 IDP group 112. All Rights Reserved.
 #
 ####################################################################################################
+
+"""
+Configuration constants and static topology definitions for the navigation
+subsystem of the AGV.
+
+This module defines control gains, timing parameters, node topology,
+and drop-off mappings used by pathfinding and motion control.
+"""
 
 # upp - upload program
 # rp - run program
@@ -30,12 +39,26 @@ MAX_PD_CORRECTION = 80
 # KD apparently should be KP*(10-20) (!) as a starting value
 # so KD = 200 would be better as a test ..?!
 class PD:
+    """
+    Proportional–Derivative control gains for line-following.
+
+    Attributes:
+        KP (int): Proportional gain.
+        KI (int): Integral gain.
+        KD (int): Derivative gain.
+    """
     KP = 200
     KI = 0
     KD = 0
 
 
 class LineSensor:
+    """
+    Logical indices for the four line sensors.
+
+    Defines the positional mapping used throughout motion control
+    and PD error calculation.
+    """
     OUTER_LEFT = 3
     INNER_LEFT = 2
     INNER_RIGHT = 1

@@ -20,7 +20,16 @@ from logger.logger import logger
 
 
 def junction_detection(o_t) -> int | None:  # type: ignore
-    """Detect a junction essentially on the leading edge"""
+    """
+    Detect a junction based on the rising edge of the outer line sensors.
+
+    Args:
+        o_t (bool): Rising-edge flag from outer sensors.
+
+    Returns:
+        int | None: Timestamp (ms) marking the junction start if detected,
+        otherwise None.
+    """
     if o_t:
         logger.log(
             "Junction detection: Detected a junction {}",
@@ -34,7 +43,20 @@ def junction_detection(o_t) -> int | None:  # type: ignore
 
 
 def line_detection(li, ri, i_t, turn_type, turn_start) -> str:
-    "Detect the line during a turn"
+    """
+    Detect when the robot has successfully aligned with a new line segment
+    after executing a junction manoeuvre.
+
+    Args:
+        li (int): Left inner sensor reading (0 or 1).
+        ri (int): Right inner sensor reading (0 or 1).
+        i_t (bool): Rising-edge flag for inner sensors.
+        turn_type (JunctionOptions): Type of junction command executed.
+        turn_start (int): Timestamp (ms) when the turn began.
+
+    Returns:
+        str: LineState.CENTERED if a new line is detected, otherwise LineState.UNKNOWN.
+    """
     grace_period = (
         JUNCTION_STRAIGHT_GRACE_PERIOD
         if turn_type == JunctionOptions.GO_STRAIGHT
@@ -57,4 +79,3 @@ def line_detection(li, ri, i_t, turn_type, turn_start) -> str:
         return LineState.CENTERED
     return LineState.UNKNOWN
 
-    # TODO: Need explicit search pattern if we lose the junction somehow...

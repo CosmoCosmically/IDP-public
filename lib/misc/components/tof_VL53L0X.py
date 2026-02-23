@@ -29,6 +29,9 @@ from misc.state import ToFState as State
 
 
 class ToFs:
+    """
+    Manages one or two VL53L0X ToF sensors for bay occupancy detection.
+    """
     def __init__(self):
         self.left_i2c_bus = I2C(id=0, sda=Pin(LEFT_I2C_SDA), scl=Pin(LEFT_I2C_SCL))
         self.right_i2c_bus = I2C(id=1, sda=Pin(RIGHT_I2C_SDA), scl=Pin(RIGHT_I2C_SCL))
@@ -54,6 +57,9 @@ class ToFs:
     # start/stop tof
     # ==========================
     def start_tofs(self):
+        """
+        Initialise and start all configured ToF sensors.
+        """
         print("starting ToF sensors...")
         for tof in self.tofs:
             tof.start()
@@ -65,17 +71,35 @@ class ToFs:
         logger.log("ToF sensors started!")
 
     def stop_tofs(self):
+        """
+        Stop all ToF sensors.
+        """
         for tof in self.tofs:
             tof.stop()
         print("Stopped ToF sensors.")
 
     def sel_tof(self, side: str):
+        """
+        Select left or right ToF sensor.
+
+        Args:
+            side (str): "left" or "right".
+
+        Returns:
+            VL53L0X: Selected sensor instance.
+        """
         return self.left_tof if side == "left" else self.right_tof
 
     def start_reading(self):
+        """
+        Transition ToF state to begin acquiring readings.
+        """
         self.state = State.ACQUIRING_READINGS
 
     def reset(self):
+        """
+        Reset internal reading buffers and state.
+        """
         self._triggers = 0
         self._total_triggers = 0
         self.occupied = True
@@ -97,7 +121,10 @@ class ToFs:
         return d
 
     def get_distances(self, side):
-        "Get distances until triggered > NUM_TRIGGERS"
+        """
+        Accumulate distance samples until trigger limits are reached,
+        then determine bay occupancy.
+        """
         if self._triggers >= NUM_TRIGGERS or self._total_triggers >= MAX_TRIGGERS:
             # Convert 0 readings to 600 readings
             self._readings = [600 if r == 0 else r for r in self._readings]
@@ -122,6 +149,9 @@ class ToFs:
         self._total_triggers += 1
 
     def handler(self, side):
+        """
+        Main state handler for ToF acquisition.
+        """
         if self.state == State.ACQUIRING_READINGS:
             self.get_distances(side)
 

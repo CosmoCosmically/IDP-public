@@ -10,4 +10,8 @@ from grabber.config import SERVO_PULSE_WIDTH
 
 
 def pulse_width_to_pwm(val: int) -> int:
+    """
+    Convert a pulse width in microseconds to a PWM duty value.
+    """
     return round((val / SERVO_PULSE_WIDTH) * (2**16 - 1))
+ 

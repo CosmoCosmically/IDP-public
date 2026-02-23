@@ -16,12 +16,18 @@ from config import DEBUG, USB_DEBUG, LOG_LEVELS, LOG_LEVEL, LOG_FILE, MAX_LOG_SI
 if DEBUG or USB_DEBUG:
     # Full logger
     class Logger:
+        """
+        File-backed logger with optional USB output and size truncation.
+        """
         def __init__(self):
             self.f = open(LOG_FILE, "wb")
             self.size = 0
             self.start = ticks_ms()
 
         def log(self, msg, *args, level=LOG_LEVELS.DEBUG):
+            """
+            Log a formatted message if above configured log level.
+            """
             if level < LOG_LEVEL:
                 return
             msg = msg.format(*args)
@@ -44,12 +50,18 @@ if DEBUG or USB_DEBUG:
                     pass
 
         def close(self):
+            """
+            Close the log file handle.
+            """
             self.f.close()
 
     logger = Logger()
 else:
     # Minimal prototype
     class LoggerProto:
+        """
+        Minimal no-op logger used when debugging is disabled.
+        """
         def log(self, *args, **kwargs):
             return
 

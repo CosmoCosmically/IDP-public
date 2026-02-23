@@ -21,3 +21,4 @@ def normalise_power(power: int) -> int:
     elif power < 0:
         power = 0
     return int((2**16 - 1) * (power / 100))
+

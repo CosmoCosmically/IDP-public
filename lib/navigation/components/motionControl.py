@@ -34,6 +34,10 @@ from navigation.state import MotionState as State
 
 
 class motion:
+    """
+    High-level motion state machine coordinating line following,
+    junction handling, turning, and PD-based correction.
+    """
     def __init__(self):
         self.pd = PDControl()
 
@@ -57,31 +61,49 @@ class motion:
 
     @property
     def state(self):
+        """
+        Current motion state.
+        """
         return self._state
 
     @state.setter
     def state(self, state):
+        """
+        Transition motion state and flag a state change.
+        """
         self.state_transition = True
         self._state = state
 
     def forward(self, power: int = ROBOT_SPEED):
+        """
+        Command the robot to move forward while following the line.
+        """
         logger.log("Motion: Received forward command", level=LOG_LEVELS.DEBUG)
         self.state = State.FOLLOWING_LINE
         self.reversing = False
         self._forward(power)
 
     def reverse(self, power: int = ROBOT_SPEED):
+        """
+        Command the robot to reverse while following the line.
+        """
         logger.log("Motion: Received reverse command", level=LOG_LEVELS.DEBUG)
         self.state = State.FOLLOWING_LINE
         self.reversing = True
         self._reverse(power)
 
     def stop(self):
+        """
+        Immediately stop both motors and enter REST state.
+        """
         logger.log("Motion: Received stop command", level=LOG_LEVELS.DEBUG)
         self.state = State.REST
         self._stop()
 
     def turn_left(self, power: int = ROBOT_SPEED):
+        """
+        Execute a left turn at a junction.
+        """
         logger.log(
             "Motion: Received left command",
             level=LOG_LEVELS.DEBUG,
@@ -94,6 +116,9 @@ class motion:
         self.right.forward(power)
 
     def turn_right(self, power: int = ROBOT_SPEED):
+        """
+        Execute a right turn at a junction.
+        """
         logger.log("Motion: Received right command", level=LOG_LEVELS.DEBUG)
         # Get a start time for the junction grace period
         self.junction_turn_start = ticks_ms()
@@ -103,6 +128,9 @@ class motion:
         self.right.reverse(power)
 
     def continue_straight(self, power: int = ROBOT_SPEED):
+        """
+        Continue straight through a junction.
+        """
         logger.log("Motion: Received continue straight command", level=LOG_LEVELS.DEBUG)
         # Get a start time for the junction grace period
         self.junction_turn_start = ticks_ms()
@@ -110,6 +138,13 @@ class motion:
         self._forward(power)
 
     def u_turn(self, power: int = ROBOT_SPEED, opposite=False):
+        """
+        Execute a U-turn at a junction.
+
+        Args:
+            power (int): Turn power.
+            opposite (bool): Reverse turning direction if True.
+        """
         # TODO: This only works at a junction, not on a line (probably fine)
         logger.log("Motion: Received u_turn command", level=LOG_LEVELS.DEBUG)
         self.junction_turn_start = ticks_ms()
@@ -124,32 +159,49 @@ class motion:
     ############# PRIVATE METHODS - DO NOT USE OUTSIDE #############
 
     def _forward(self, power: int = ROBOT_SPEED):
+        """
+        Internal motor drive: set both motors forward and apply PD tunings.
+        """
         logger.log("Motion: internal forward", level=LOG_LEVELS.DEBUG)
         self.pd.pd.tunings = (PD.KP, PD.KI, PD.KD)
         self.left.forward(power)
         self.right.forward(power)
 
     def _reverse(self, power: int = ROBOT_SPEED):
+        """
+        Internal motor drive: set both motors in reverse and apply PD tunings.
+        """
         logger.log("Motion: internal reverse", level=LOG_LEVELS.DEBUG)
         self.pd.pd.tunings = (PD.KP * 0.25, PD.KI, PD.KD * 0.25)
         self.left.reverse(power)
         self.right.reverse(power)
 
     def _stop(self):
+        """
+        Internal stop: set both motors to zero power.
+        """
         logger.log("Motion: internal stop", level=LOG_LEVELS.DEBUG)
         self.left.forward(0)
         self.right.forward(0)
 
     def _turn_handle(self):
-        "Manually prime motion to handle a turn"
+        """
+        Internal handler to prime state for turn execution.
+        """
         self.state = State.JUNCTION
 
     def _update_pd(self, lsrs):
+        """
+        Internal: Update motor powers using PD correction based on line sensor readings.
+        """
         correction = self.pd.calculate_correction(lsrs)
         self.left.correct_power(-correction)
         self.right.correct_power(correction)
 
     def _update(self, lsrs, o_t):
+        """
+        Internal: Handle line following and junction detection logic.
+        """
         lo, _, _, ro = lsrs
         # Ignore inner sensors for junction detection
         # ONLY true if not already triggered and current reading is 1
@@ -169,6 +221,9 @@ class motion:
         self._update_pd(lsrs)
 
     def _line_detection(self, lsrs, i_t):
+        """
+        Internal: Detect line state during junction handling and update state accordingly.
+        """
         _, li, ri, _ = lsrs
         # Straight doesn't turn so accept either line sensor
         self.line_state = line_detection(
@@ -196,6 +251,9 @@ class motion:
             self.state = State.FOLLOWING_LINE
 
     def _handler(self, _):
+        """
+        Internal: Main state handler for motion state machine.
+        """
         if self.state_transition:
             # Reset the PD controller on state transition
             self.pd.reset()

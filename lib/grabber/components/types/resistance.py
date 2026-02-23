@@ -7,8 +7,10 @@
 ####################################################################################################
 
 
-# TODO: Need more helpful names
 class Reel:
+    """
+    Enumeration of reel types detected via resistance sensing.
+    """
     REEL_0 = 0
     REEL_1 = 1
     REEL_2 = 2
@@ -17,3 +19,4 @@ class Reel:
 
 
 REEL_ARR = [Reel.REEL_0, Reel.REEL_1, Reel.REEL_2, Reel.REEL_3]
+ 

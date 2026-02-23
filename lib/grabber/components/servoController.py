@@ -25,6 +25,9 @@ SERVO = {
 
 
 class servoController:
+    """
+    Controls a single servo using PWM and a simple timed position model.
+    """
     def __init__(self, servo: int):
         """Initiate a servo controller for a servo
 
@@ -47,11 +50,19 @@ class servoController:
         self._turn_start_time = None
 
     def _set_position(self, pulse_width: int):
-        """Private method to set servo power"""
+        """
+        Apply a raw pulse width to the servo PWM output.
+        """
         self.pwm.duty_u16(pulse_width_to_pwm(pulse_width))
 
     def set_position(self, position: int, manual=False):
-        "Set the position, prevent state change if manual."
+        """
+        Command servo to a predefined position.
+
+        Args:
+            position (int): ServoPositions constant.
+            manual (bool): If True, bypass state transition.
+        """
         if not manual:
             self.state = State.TURNING
         self._turn_start_time = ticks_ms()
@@ -75,6 +86,9 @@ class servoController:
 
     # TODO: For precise control, servo needs tuning!
     def _handler(self):
+        """
+        Update servo state based on elapsed turn time.
+        """
         if self.state == State.TURNING:
             if (
                 self._turn_start_time is not None

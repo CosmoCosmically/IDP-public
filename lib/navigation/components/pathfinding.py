@@ -12,6 +12,9 @@ from logger.logger import logger
 
 
 class pathfinding:
+    """
+    Breadth-first search based path planner operating on the static node graph.
+    """
     def __init__(self):
         self.node_map = NODE_MAP
         self.node_list = NODE_LIST
@@ -85,6 +88,17 @@ class pathfinding:
 
     @staticmethod
     def compute_turn(current_ori, target_ori):
+        """
+        Compute relative junction command required to rotate from
+        current orientation to target orientation.
+
+        Args:
+            current_ori (str): Current cardinal orientation ("N", "E", "S", "W").
+            target_ori (str): Target cardinal orientation.
+
+        Returns:
+            tuple[JunctionOptions, str]: Relative command and updated orientation.
+        """
         ci = pathfinding.ORI_TO_INT[current_ori]
         ti = pathfinding.ORI_TO_INT[target_ori]
         diff = (ti - ci) & 3
@@ -108,10 +122,17 @@ class pathfinding:
         start_orientation: str,
     ):
         """
-        Convert a path (absolute moves) into relative JunctionOptions
-        given a starting orientation.
-        start_orientation: one of {"N", "E", "S", "W"}
-        Returns: List[JunctionOptions]
+        Convert absolute cardinal moves into relative junction commands.
+
+        Args:
+            start_node (str): Starting node identifier.
+            end_node (str): Destination node identifier.
+            start_orientation (str): Initial orientation ("N", "E", "S", "W").
+
+        Returns:
+            tuple[str, list[str], list[JunctionOptions]] | None:
+                Final orientation, traversed nodes, and relative commands,
+                or None if no path exists.
         """
         # Get absolute moves from BFS
         # We start at the start node (junction) so we should path find from next node

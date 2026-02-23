@@ -12,5 +12,4 @@ class Junction:
     RIGHT = "RIGHT"
     T = "T"
 
-
-# in total, there are 6 Junction types. LEFT, RIGHT, T, +, |-, -|
+ 

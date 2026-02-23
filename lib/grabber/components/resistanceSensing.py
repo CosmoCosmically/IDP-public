@@ -23,6 +23,9 @@ from grabber.components.state import ResistanceSenseState as State
 
 
 class resistanceSensing:
+    """
+    Performs analog resistance measurements to identify reel type.
+    """
     def __init__(self):
         """Class for resistance sensing."""
         self._raw_resistance = ADC(RESISTANCE_SENSE_PIN)
@@ -37,10 +40,16 @@ class resistanceSensing:
         return self._reel
 
     def start_sense(self):
+        """
+        Begin resistance sensing sequence.
+        """
         logger.log("Resistance sensing - starting sense!")
         self.state = State.OPEN
 
     def reset(self):
+        """
+        Reset sensing state and buffers.
+        """
         logger.log("Resistance sensing - resetting sense!")
         self.state = State.REST
         self._readings = []
@@ -55,6 +64,12 @@ class resistanceSensing:
         self._state = state
 
     def _get_reel(self):
+        """
+        Collect readings and determine reel classification when sufficient data exists.
+
+        Returns:
+            Reel | None: Detected reel type or None if still sampling.
+        """
         if self._oc_count > RESISTANCE_OC_FALLBACK_COUNT:
             # No good detections, just guess 0
             # TODO: Change to closest node
@@ -79,6 +94,9 @@ class resistanceSensing:
         return reel
 
     def _handler(self):
+        """
+        Internal state machine handler for resistance sensing.
+        """
         if self.state == State.REST:
             # Nothing to do
             return

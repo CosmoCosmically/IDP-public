@@ -32,3 +32,4 @@ def calculate_reel(raw_resistance: float) -> int | None:
     else:
         reel = Reel.REEL_2
     return reel
+ 

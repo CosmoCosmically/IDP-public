@@ -21,6 +21,9 @@ from navigation.components.utils.movingAverage import movingAverage
 
 
 class lineSensor:
+    """
+    Wrapper around a single digital line sensor.
+    """
     def __init__(self, line_sensor: int):
         self.pin = Pin(LINE_SENSOR_PINS[line_sensor], Pin.IN)
 
@@ -34,6 +37,10 @@ class lineSensor:
 
 
 class lineSensorArray:
+    """
+    Manages the full array of line sensors, including moving average
+    smoothing and rising-edge detection.
+    """
     def __init__(self):
         outer_left = lineSensor(LineSensor.OUTER_LEFT)
         inner_left = lineSensor(LineSensor.INNER_LEFT)
@@ -50,6 +57,12 @@ class lineSensorArray:
         self.curr = (0, 0, 0, 0)
 
     def _read(self) -> tuple[int]:
+        """
+        Read raw digital values from all sensors.
+
+        Returns:
+            tuple[int, int, int, int]: Raw readings (0 or 1) for each sensor.
+        """
         values = (ls.read() for ls in self.line_sensor_arr)
         return tuple(values)
         # tuple of size 4 of 0 or 1 for each sensor
@@ -67,12 +80,21 @@ class lineSensorArray:
         return self.curr
 
     def update_rising_edge(self):
+        """
+        Update cached rising-edge flags for outer and inner sensors.
+        """
         lo, li, ri, ro = self.curr
         self.o_t = lo or ro
         self.i_t = li and ri
 
     @property
     def rising_edge(self):
+        """
+        Get the current rising-edge detection state.
+
+        Returns:
+            tuple[bool, bool]: (outer_triggered, inner_triggered)
+        """
         return (self.o_t, self.i_t)
 
 

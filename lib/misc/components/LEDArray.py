@@ -14,27 +14,44 @@ from config import LED_PINS
 
 
 class LEDArray:
+    """
+    Controls a multi-LED array for reel indication and status feedback.
+    """
     def __init__(self):
         self.LEDS = {k: Pin(v, Pin.OUT) for k, v in LED_PINS.items()}
         self.f_c = 0
         self.l_f = ticks_ms()
 
     def transition(self, reel):
-        "Change the LED for a given reel"
+        """
+        Activate the LED corresponding to a specific reel and disable others.
+
+        Args:
+            reel (Reel): Reel identifier.
+        """
         self.all(0)
         self.LEDS[reel].on()
 
     def off(self):
-        "Turn LED off"
+        """
+        Turn all LEDs off.
+        """
         self.all(0)
 
     def all(self, val):
-        "Turn all on / off"
+        """
+        Set all LEDs to a given value.
+
+        Args:
+            val (int): 0 for off, 1 for on.
+        """
         for _, led in self.LEDS.items():
             led.value(val)
 
     def strobe(self):
-        "Turn the last LED off and the next on w/ debounce"
+        """
+        Cycle through reel LEDs sequentially with debounce and reset timeout.
+        """
         t_d = ticks_diff(ticks_ms(), self.l_f)
         if t_d < LED_STROBE_DEBOUNCE:
             return
@@ -46,7 +63,9 @@ class LEDArray:
         self.l_f = ticks_ms()
 
     def flash(self):
-        "Turn all on or all off w/ debounce"
+        """
+        Flash all LEDs on and off with debounce and reset timeout.
+        """
         t_d = ticks_diff(ticks_ms(), self.l_f)
         if t_d < LED_FLASH_DEBOUNCE:
             return

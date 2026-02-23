@@ -12,3 +12,4 @@ class LineSensor:
     INNER_LEFT = 1
     INNER_RIGHT = 2
     OUTER_RIGHT = 3
+    

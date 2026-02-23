@@ -11,7 +11,18 @@ last_error = 0
 
 def calculate_error(line_sensor_arr: list[int]) -> float:
     global last_error
-    "Calculate the weighted error from the line sensor readings"
+    """
+    Compute the weighted lateral error from line sensor readings.
+
+    Uses a symmetric weighting scheme across the four sensors and
+    preserves the last non-zero error if the line is temporarily lost.
+
+    Args:
+        line_sensor_arr (list[int]): Sensor readings in order [LO, LI, RI, RO].
+
+    Returns:
+        float: Signed lateral error used for PD correction.
+    """
     LO, LI, RI, RO = line_sensor_arr
     active_sensors = LO + LI + RI + RO
     if active_sensors == 0:

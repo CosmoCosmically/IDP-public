@@ -22,6 +22,10 @@ MOTOR = {
 
 
 class motorController:
+    """
+    Abstraction over a single DC motor including direction control,
+    PWM power control, bias compensation, and PD-based correction support.
+    """
     def __init__(self, motor: int):
         """Initiate a motor controller for a motor
 
@@ -49,11 +53,28 @@ class motorController:
         self._bias = LEFT_MOTOR_BIAS if self.name == "left" else RIGHT_MOTOR_BIAS
 
     def _direction(self, power: int):
-        "Power >= 0: forward else reverse"
+        """
+        Determine motor direction from signed power.
+
+        Args:
+            power (int): Signed motor power.
+
+        Returns:
+            Direction: FORWARD if power >= 0, else REVERSE.
+        """
         self.direction = Direction.FORWARD if power >= 0 else Direction.REVERSE
         return self.direction
 
     def _get_correction_dir(self, power):
+        """
+        Convert power sign into a numeric direction multiplier.
+
+        Args:
+            power (int): Signed motor power.
+
+        Returns:
+            int: +1 for forward, -1 for reverse.
+        """
         dir = self._direction(power)
         return 1 if dir == Direction.FORWARD else -1
 
@@ -76,7 +97,12 @@ class motorController:
         self.pwm.duty_u16(normalised_power)
 
     def correct_power(self, correction):
-        "Method exposed for PD motor control corrections"
+        """
+        Apply a PD correction around the current base power.
+
+        Args:
+            correction (float): Signed correction from PD controller.
+        """
         new_power = self.base_power + (
             correction * self._get_correction_dir(self.base_power)
         )
@@ -88,12 +114,27 @@ class motorController:
         self._set_power(new_power)
 
     def off(self):
+        """
+        Stop the motor and reset base power to zero.
+        """
         self._set_power(0, True)
 
     def forward(self, power_level: int = ROBOT_SPEED):
+        """
+        Drive the motor forward.
+
+        Args:
+            power_level (int): Desired forward power level.
+        """
         self._set_power(power_level, True)
 
     def reverse(self, power_level: int = ROBOT_SPEED):
+        """
+        Drive the motor in reverse.
+
+        Args:
+            power_level (int): Desired reverse power level.
+        """
         self._set_power(-power_level, True)
 
 
